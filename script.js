@@ -71,12 +71,12 @@ function generate_loa() {
 To whom it may concern,
 
 
-This letter serves to authorize AS${peer_asn}  to announce the following IP address blocks:
+This Letter of Agreement (LoA) serves to authorize AS${peer_asn} to announce the following IP address block(s):
 
 ${prefixes}
 
 
-As a representative of the above IP block(s) and AS${asn} (${name}), I hereby declare that my organization ${organization_name} (whom is authorized to use such internet resources), to sign for this LOA. All traffic comes from this AS number is fully responsible by my organization.  AS9267 and/or AS38254 operator(s) does not control, and are not responsible for any content that this ASN transmits through the testbed infrastructure. My organization also understands that the academic and/or commercial network transit service(s) provided by AS9267 and/or AS38254 may revoke/terminate by the operator(s) at any time for any reason without notice.
+As a representative of my organization (${organization_name}) to sign for this LOA, I hereby declare that my organization is authorized to use above IP block(s) and AS${asn} (${name}). All traffic comes from this AS number is fully responsible by my organization.  AS9267 and/or AS38254 operator(s) does not control, and are not responsible for any content that this ASN transmits through the testbed infrastructure. My organization also understands that the academic and/or commercial network transit service(s) provided by AS9267 and/or AS38254 may revoke/terminate by the operator(s) at any time for any reason without notice.
 
 `
     if (notes !== "") {
@@ -135,7 +135,7 @@ function loa_pdf_doc() {
 
     doc.setFontSize(8);
     doc.setTextColor("gray");
-    doc.text(20, 280, "Note: The applicant is required to sign the hardcopy document and subsequently scan it as a PDF for submission. **No electronic signature**"+ "\n" + " Thank you very much for the cooperation.");
+    doc.text(20, 280, "Note: The applicant is required to sign the hardcopy document and subsequently scan it as a PDF for submission. **No electronic signature**"+ "\n" + "Thank you very much for the cooperation.");
 
     return doc
 }
@@ -146,6 +146,6 @@ function save_pdf_loa() {
     }
 
     let doc = loa_pdf_doc();
-    let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "");
-    doc.save("LoA_AS" + peer_asn + "_" + date_string() + ".pdf");
+    // let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "");
+    doc.save("LoA_AS" + asn + "_" + date_string() + ".pdf");
 }
