@@ -40,13 +40,13 @@ function form_ok() {
 function load_peeringdb_data() {
     let local_asn = document.getElementById("form-asn").value;
     if (local_asn !== undefined) {
-        fetch("https://www.peeringdb.com/api/net?asn=" + local_asn)
+        fetch("https://www.peeringdb.com/api/org?asn=" + local_asn)
             .then(resp => resp.json())
             .then(data => {
                 if (data.data.length === 1) {
                     network = data.data[0]
-                    document.getElementById("form-network-name").value = network.name;
-                    document.getElementById("form-organization-name").value = network.irr_as_set.split('::')[0]
+                    document.getElementById("form-network-name").value = network.aka;
+                    document.getElementById("form-organization-name").value = network.name;
                 }
             })
     }
