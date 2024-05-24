@@ -71,7 +71,7 @@ function generate_loa() {
 To whom it may concern,
 
 
-This Letter of Agreement (LoA) serves to authorize AS${peer_asn} to announce the following IP address block(s):
+This Letter of Authorization (LoA) serves to authorize AS${peer_asn} to announce the following IP address block(s):
 
 ${prefixes}
 
