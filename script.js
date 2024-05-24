@@ -46,7 +46,6 @@ function load_peeringdb_data() {
                 if (data.data.length === 1) {
                     network = data.data[0]
                     document.getElementById("form-network-name").value = network.name;
-                    document.getElementById("form-organization-name").value = network.irr_as_set.split('::')[0]
                 }
             })
     }
@@ -55,7 +54,7 @@ function load_peeringdb_data() {
 function generate_loa() {
     let prefixes = document.getElementById("form-prefixes").value.replace(/(\r\n|\r|\n){2}/g, "$1").replace(/(\r\n|\r|\n){3,}/g, "$1\n").replace(/\n+$/, ""); // Remove duplicate newlines
     let organization_name = document.getElementById("form-organization-name").value;
-    let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "").replace("AND/OR", "and/or");
+    let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "");
     let date = document.getElementById("form-date").value;
     let name = document.getElementById("form-network-name").value;
     let asn = document.getElementById("form-asn").value.toUpperCase().replace("AS", "");
@@ -135,7 +134,7 @@ function loa_pdf_doc() {
 
     doc.setFontSize(8);
     doc.setTextColor("gray");
-    doc.text(20, 280, "Note: The applicant is required to sign the hardcopy document and subsequently scan it as a PDF for submission."+ "\n" + "Electronic signature is not accepted.Thank you for the cooperation.");
+    doc.text(20, 280, "Note: The applicant is required to sign the hardcopy document and subsequently scan it as a PDF for submission. **No electronic signature**"+ "\n" + " Thank you very much for the cooperation.");
 
     return doc
 }
@@ -146,21 +145,6 @@ function save_pdf_loa() {
     }
 
     let doc = loa_pdf_doc();
-    let local_asn = document.getElementById("form-asn").value;
     let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "");
-    doc.save("LoA_AS" + peer_asn + "_" + date_string()+ "." +hash(local_asn+date_string())  +".pdf");
-}
-
-function hash(s){
-    var re = 1, c = 0, h, o;
-    if (s) {
-        re = 0;
-        for (h = s.length - 1; h >= 0; h--) {
-            o = s.charCodeAt(h);
-            re = (re<<6&268435455) + o + (o<<14);
-            c = re & 266338304;
-            re = c!==0?re^c>>21:re;
-        }
-    }
-    return String(re);
+    doc.save("LoA_AS" + peer_asn + "_" + date_string() + ".pdf");
 }
