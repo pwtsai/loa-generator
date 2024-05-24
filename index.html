@@ -57,6 +57,7 @@
           id="form-asn"
           onblur="load_peeringdb_data()"
           placeholder="23456"
+          inputmode="numeric"
           required
           type="number"
         />
@@ -103,6 +104,7 @@
           id="form-email"
           placeholder="noc@example.edu"
           required
+          inputmode="email"
           type="email"
         />
       </label>
@@ -111,7 +113,7 @@
 
       <label>
         NOC Contact Phone<span class="req">*</span>
-        <input id="form-phone" placeholder="+1 (123) 456 7890" type="text" />
+        <input id="form-phone" placeholder="+1 (123) 456 7890" type="text" inputmode="tel" />
       </label>
 
       <label>

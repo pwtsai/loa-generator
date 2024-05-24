@@ -53,16 +53,16 @@ function load_peeringdb_data() {
 }
 
 function generate_loa() {
-    let prefixes = document.getElementById("form-prefixes").value.replace(/(\r\n|\r|\n){2}/g, "$1").replace(/(\r\n|\r|\n){3,}/g, "$1\n").replace(/\n+$/, ""); // Remove duplicate newlines
-    let organization_name = document.getElementById("form-organization-name").value;
-    let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "");
-    let date = document.getElementById("form-date").value;
-    let name = document.getElementById("form-network-name").value;
-    let asn = document.getElementById("form-asn").value.toUpperCase().replace("AS", "");
-    let contact_name = document.getElementById("form-contact-name").value;
-    let contact_email = document.getElementById("form-email").value;
-    let contact_phone = document.getElementById("form-phone").value;
-    let notes = document.getElementById("form-notes").value.replace(/\n+$/, ""); // Remove trailing newline
+    let prefixes = toASCII(document.getElementById("form-prefixes").value.replace(/(\r\n|\r|\n){2}/g, "$1").replace(/(\r\n|\r|\n){3,}/g, "$1\n").replace(/\n+$/, "")); // Remove duplicate newlines
+    let organization_name = toASCII(document.getElementById("form-organization-name").value);
+    let peer_asn = toASCII(document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "").replace("AND/OR", "and/or"));
+    let date = toASCII(document.getElementById("form-date").value);
+    let name = toASCII(document.getElementById("form-network-name").value);
+    let asn = toASCII(document.getElementById("form-asn").value.toUpperCase().replace("AS", ""));
+    let contact_name = toASCII(document.getElementById("form-contact-name").value);
+    let contact_email = toASCII(document.getElementById("form-email").value);
+    let contact_phone = toASCII(document.getElementById("form-phone").value);
+    let notes = toASCII(document.getElementById("form-notes").value.replace(/\n+$/, "")); // Remove trailing newline
     let nowDate = new Date(date).toLocaleDateString();
 
     let loa_body = 
@@ -148,4 +148,16 @@ function save_pdf_loa() {
     let doc = loa_pdf_doc();
     let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "");
     doc.save("LoA_AS" + peer_asn + "_" + date_string() + ".pdf");
+}
+
+function toASCII(chars) {
+    var ascii = '';
+    for(var i=0; i< chars.length; i++) {
+        var c = chars.charCodeAt(i);
+        if (c >= 0xFF01 && c <= 0xFF5E) {
+            c = 0xFF & (c + 0x20);
+        }
+        ascii += String.fromCharCode(c);
+    }
+    return ascii;
 }
