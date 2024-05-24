@@ -1,3 +1,7 @@
+# https://loa.itlab.cc
+# Please refer to this URL for generating your LoA. 
+
+
 # LoA Generator
 
 Quickly generate LoAs (letters of authorization) in your browser as plaintext or a PDF.
