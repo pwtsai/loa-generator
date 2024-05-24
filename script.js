@@ -146,6 +146,6 @@ function save_pdf_loa() {
     }
 
     let doc = loa_pdf_doc();
-    // let peer_asn = document.getElementById("form-peer-asn").value.toUpperCase().replace("AS", "");
-    doc.save("LoA_AS" + asn + "_" + date_string() + ".pdf");
+    let customer_asn = document.getElementById("form-asn").value.toUpperCase().replace("AS", "");
+    doc.save("LoA_AS" + customer_asn + "_" + date_string() + ".pdf");
 }
